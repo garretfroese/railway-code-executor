@@ -326,7 +326,12 @@ const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔧 Railway PORT env: ${process.env.PORT}`);
   console.log(`📍 Server address: ${server.address()?.address}:${server.address()?.port}`);
+  console.log(`✅ Server is ready and stable`);
 });
+
+// Keep the process alive
+server.keepAliveTimeout = 120000; // 2 minutes
+server.headersTimeout = 120000; // 2 minutes
 
 // Handle server errors
 server.on('error', (error) => {
@@ -340,6 +345,19 @@ process.on('SIGTERM', () => {
     console.log('✅ Server closed');
     process.exit(0);
   });
+});
+
+process.on('SIGINT', () => {
+  console.log('🛑 SIGINT received, shutting down gracefully');
+  server.close(() => {
+    console.log('✅ Server closed');
+    process.exit(0);
+  });
+});
+
+// Prevent the process from exiting
+process.on('exit', (code) => {
+  console.log(`🔄 Process exiting with code: ${code}`);
 });
 
 module.exports = app;
