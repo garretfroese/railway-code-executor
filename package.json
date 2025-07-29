@@ -1,0 +1,29 @@
+{
+  "name": "railway-code-executor",
+  "version": "1.0.0",
+  "description": "A secure API service for executing code remotely with rate limiting and webhook notifications",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": ["api", "code-execution", "railway", "nodejs", "express"],
+  "author": "Manus AI",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "isolated-vm": "^5.0.2",
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.3.2"
+  }
+}
+
